@@ -29,6 +29,93 @@ Constraints:
 1 <= nums.length <= 5 * 104
 -231 <= nums[i] <= 231 - 1
 */
+
+//Optimal Solution:
+
+class Solution {
+public:
+    int reversePairs(vector<int>& nums) {
+        int n = nums.size();
+
+        vector<int> copyBuffer(n);
+        return mergesort(nums.begin(), nums.end(), copyBuffer.begin(), copyBuffer.end());
+    }
+
+private:
+    template <typename It>
+    int mergesort(It begin, It end, It copyBegin, It copyEnd) {
+        if (begin + 1 >= end) { return 0; }
+
+        int splitIdx = (end - begin) / 2;
+        It split = begin + splitIdx;
+        It copySplit = copyBegin + splitIdx;
+
+        int result = 0;
+        result += mergesort(begin, split, copyBegin, copySplit);
+        result += mergesort(split, end, copySplit, copyEnd);
+
+        result += countReversePairs(begin, split, end);
+        merge(begin, split, end, copyBegin, copyEnd);
+
+        return result;
+    }
+
+    template <typename It>
+    void merge(It begin, It split, It end, It copyBegin, It copyEnd) {
+        It place = copyBegin;
+        It source1 = begin;
+        It source2 = split;
+        while (source1 != split && source2 != end) {
+            if (*source1 <= *source2) {
+                *place = *source1;
+                ++source1;
+            } else {
+                *place = *source2;
+                ++source2;
+            }
+            ++place;
+        }
+
+        while (source1 != split) {
+            *place = *source1;
+            ++place;
+            ++source1;
+        }
+
+        while (source2 != end) {
+            *place = *source2;
+            ++place;
+            ++source2;
+        }
+
+        assert(place == copyEnd);
+        for (It from = copyBegin, to = begin; to != end; ++from, ++to) {
+            *to = *from;
+        }
+    }
+
+    template <typename It>
+    int countReversePairs(It begin, It split, It end) {
+        int count = 0;
+
+        It it2 = split;
+        for (It it1 = begin; it1 != split; ++it1) {
+            int lowIndexVal = *it1;
+            int highIndexUpperBound = *it1 / 2;
+            if (lowIndexVal > 0 && lowIndexVal % 2 == 1) { ++highIndexUpperBound; }
+            while (it2 != end && *it2 < highIndexUpperBound) {
+                ++it2;
+            }
+            count += (it2 - split);
+        }
+
+        return count;
+    }
+};
+
+
+//My solution:
+
 class Solution {
 private: 
     void merge(vector<int>& nums, int low, int mid, int high, int& reversePairsCount){
