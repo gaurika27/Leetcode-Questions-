@@ -22,3 +22,32 @@ Constraints:
 -109 <= nums[i] <= 109
 */
 
+//M1
+#include <algorithm>
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if (nums.empty())
+            return 0;
+
+        sort(nums.begin(), nums.end());
+
+        int cnt = 1;
+        int maxx = 1;
+
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] == nums[i - 1] + 1) {
+                cnt++;
+                maxx = max(maxx, cnt);
+            } else if (nums[i] != nums[i - 1]) {
+                cnt = 1;
+            }
+        }
+
+        if (nums.size() > 1 && nums.back() == nums[nums.size() - 2] + 1) {
+            maxx = max(maxx, cnt);
+        }
+
+        return maxx;
+    }
+};
