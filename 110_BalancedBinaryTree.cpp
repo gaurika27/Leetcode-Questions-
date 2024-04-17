@@ -1,3 +1,23 @@
+//Balanced BT-> for every node=height(left)-height(right)
+/*PSEUDOCODE
+bool check(Node)
+  if node==null
+    return true
+
+  lh=findHleft(node->left)
+  rh=findHright(node->right)
+
+  if(abs(rh-lh)>1) return false;
+  
+  bool left=check(node->left)
+  bool right=check(node->right)
+  
+  if(!left||!right) return false;
+
+  return true;
+
+*/
+
 /*
 Given a binary tree, determine if it is 
 height-balanced
