@@ -1,5 +1,5 @@
 //Balanced BT-> for every node=height(left)-height(right)
-/*PSEUDOCODE
+/*PSEUDOCODE for O(N^2)
 bool check(Node)
   if node==null
     return true
@@ -16,6 +16,21 @@ bool check(Node)
 
   return true;
 
+*/
+
+/* PSEUDOCODE For O(N)
+int check(node){
+  if(node==NULL)
+    return 0
+
+  lh=check(node->left)
+  rh=check(noe->right)
+  
+  if(lh==-1 || rh==-1) return -1
+  if(abs(lh-rh)>1) return -1;
+  
+  return max(lh,rh)+1;
+}
 */
 
 /*
