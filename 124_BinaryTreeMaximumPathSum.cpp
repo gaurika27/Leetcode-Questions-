@@ -32,7 +32,7 @@ int maxPath(node,){
   if(node==null) return 0;
   leftsum=maxPath(node->left,
   rightsum=maxPath(node->right,
-
+  maxi=max(max,leftsum+rightsum+node->val)
   return (node->val)+max(leftsum, rightsum)
 
 }
