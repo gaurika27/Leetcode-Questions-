@@ -28,7 +28,8 @@ The number of nodes in the tree is in the range [1, 3 * 104].
 */
 
 /*PSEUDOCODE
-int maxPath(node,){
+
+int maxPath(node,maxi){
   if(node==null) return 0;
   leftsum=maxPath(node->left,
   rightsum=maxPath(node->right,
