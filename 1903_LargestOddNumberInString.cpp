@@ -29,3 +29,28 @@ num only consists of digits and does not contain any leading zeros.
 */
 
 //M1(self)
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        string maxx="";
+        for(char i: num){
+            if (int(i)%2!=0){
+            maxx=max(maxx, string(1, i));
+            }
+        }
+        return maxx;
+    }
+};
+
+//M2(optimised)
+class Solution {
+public:
+    string largestOddNumber(string num) {
+        for (int i = num.length() - 1; i >= 0; i--) {
+            if ((num[i] - '0') % 2 == 1) {
+                return num.substr(0, i + 1);
+            }
+        }
+        return "";        
+    }
+};
