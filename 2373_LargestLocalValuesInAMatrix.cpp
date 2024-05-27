@@ -31,3 +31,30 @@ n == grid.length == grid[i].length
 3 <= n <= 100
 1 <= grid[i][j] <= 100
 */
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> largestLocal(vector<vector<int>>& grid) {
+        int n = grid.size();
+        vector<vector<int>> maxLocal(n - 2, vector<int>(n - 2));
+
+        for (int i = 0; i < n - 2; ++i) {
+            for (int j = 0; j < n - 2; ++j) {
+                int localMax = INT_MIN;
+                // Find the maximum in the 3x3 sub-grid
+                for (int x = 0; x < 3; ++x) {
+                    for (int y = 0; y < 3; ++y) {
+                        localMax = max(localMax, grid[i + x][j + y]);
+                    }
+                }
+                maxLocal[i][j] = localMax;
+            }
+        }
+        return maxLocal;
+    }
+};
