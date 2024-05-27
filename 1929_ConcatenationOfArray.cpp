@@ -44,3 +44,17 @@ public:
         return ans;       
     }
 };
+
+//M2
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+        vector<int> v;
+        for(int j = 0;j<2;j++){
+            for(int i = 0;i<size(nums);i++){
+            v.push_back(nums[i]);
+        }
+        }
+        return v;
+    }
+};
