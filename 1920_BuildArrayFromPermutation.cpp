@@ -30,3 +30,11 @@ Constraints:
 The elements in nums are distinct.
 */
 
+class Solution {
+public:
+    vector<int> buildArray(vector<int>& nums) {
+        vector<int> ans(nums.size());
+        for(auto i:nums) ans[i]=nums[nums[i]];
+        return ans;
+    }
+};
