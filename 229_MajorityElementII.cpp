@@ -23,6 +23,7 @@ Constraints:
 -109 <= nums[i] <= 109
 */
 
+//M1
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
@@ -33,6 +34,25 @@ public:
         for(auto it:mpp){
             if(it.second>n/3){
                 ans.push_back(it.first);
+            }
+        }
+        return ans;      
+    }
+};
+
+//M2
+
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> ans;
+        map<int, int> mpp;
+        int m=(int)(n/3)+1;
+        for(auto i:nums){
+            mpp[i]++;        
+            if(mpp[i]==m){
+                ans.push_back(i);
             }
         }
         return ans;      
