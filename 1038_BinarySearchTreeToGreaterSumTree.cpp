@@ -25,3 +25,23 @@ The number of nodes in the tree is in the range [1, 100].
 0 <= Node.val <= 100
 All the values in the tree are unique.
 */
+
+class Solution {
+private:
+    int sum = 0;
+
+    void traverse(TreeNode* root) {
+        if (root) {
+            traverse(root->right);  // Traverse the right subtree
+            sum += root->val;  // Update the sum
+            root->val = sum;  // Update the current node's value
+            traverse(root->left);  // Traverse the left subtree
+        }
+    }
+
+public:
+    TreeNode* bstToGst(TreeNode* root) {
+        traverse(root);
+        return root;
+    }
+};
