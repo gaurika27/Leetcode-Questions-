@@ -25,23 +25,64 @@ Constraints:
 0 <= nums[i] <= 400
 */
 
-//M1_Memoization(but Time Limit exceeded)
+//M1_Memoization
 
 class Solution {
 public:
-    int f(int ind, vector<int> &nums){
+    int f(int ind, vector<int> &nums, vector<int> &dp){
         if(ind==0) return nums[ind];
         if(ind<0) return 0;
+        if(dp[ind]!=-1) return dp[ind];
 
-        int pick=nums[ind]+f(ind-2, nums);
-        int notpick=0+f(ind-1, nums);
+        int pick=nums[ind]+f(ind-2, nums, dp);
+        int notpick=0+f(ind-1, nums, dp);
 
-        return max(pick, notpick);
+        return dp[ind]= max(pick, notpick);
     }
 
     int rob(vector<int>& nums) {
         int n=nums.size();
-        return f(n-1, nums);
+        vector<int> dp(n,-1);
+        return f(n-1, nums, dp);
         
+    }
+};
+
+//M2_Tabulation
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+
+        // Base cases for handling empty array (n=0) and single house (n=1)
+        if (n == 0) return 0;
+        if (n == 1) return nums[0];
+
+        // Create a dp vector to store maximum stolen value at each house
+        vector<int> dp(n, 0);
+
+        // Initialize dp[0] with the first house's value
+        dp[0] = nums[0];
+
+        // Loop through remaining houses (i=1 to n-1)
+        for (int i = 1; i < n; i++) {
+            // Consider including the current house (pick)
+            int pick = nums[i];
+
+            // If there are at least two houses before (i>=2), add the non-adjacent house's value (dp[i-2])
+            if (i > 1) {
+                pick += dp[i - 2];
+            }
+
+            // Consider excluding the current house (notpick) and take the previous house's value
+            int notPick = dp[i - 1];
+
+            // Store the maximum value (including or excluding current house) in dp[i]
+            dp[i] = max(pick, notPick);
+        }
+
+        // Return the maximum stolen value from the last house (dp[n-1])
+        return dp[n - 1];
     }
 };
