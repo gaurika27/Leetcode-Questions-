@@ -27,3 +27,17 @@ Constraints:
 0 <= s.length <= 3 * 104
 1 <= g[i], s[j] <= 231 - 1
 */
+
+class Solution {
+public:
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        int n=g.size(), m=s.size(), l=0, r=0;
+        sort(g.begin(), g.end());
+        sort(s.begin(), s.end());
+        while(l<m && r<n){
+            if(s[l]>=g[r]) r++;
+            l++;
+        }
+        return r;
+    }
+};
