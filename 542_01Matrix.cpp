@@ -26,6 +26,8 @@ n == mat[i].length
 mat[i][j] is either 0 or 1.
 There is at least one 0 in mat.
 */
+
+//M1
 class Solution {
 public:
     bool isvalid(int i, int j, int m, int n) {
@@ -61,3 +63,58 @@ public:
         return dis;
     }
 };
+
+//M2
+class Solution {
+public:
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+
+        // Create a distance matrix initialized with maximum possible distance
+        vector<vector<int>> dis(n, vector<int>(m, INT_MAX));
+
+        // Update distances for all 0 cells
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == 0) {
+                    dis[i][j] = 0;
+                }
+            }
+        }
+
+        // Use BFS to propagate distances
+        queue<pair<int, int>> q; // Queue to store coordinates
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (dis[i][j] == 0) {
+                    q.push({i, j});
+                }
+            }
+        }
+
+        int delrow[] = {-1, 0, +1, 0};
+        int delcol[] = {0, +1, 0, -1};
+
+        while (!q.empty()) {
+            int row = q.front().first;
+            int col = q.front().second;
+            q.pop();
+
+            for (int i = 0; i < 4; i++) {
+                int nrow = row + delrow[i];
+                int ncol = col + delcol[i];
+
+                // Check for valid cell within matrix bounds and unvisited cell
+                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && dis[nrow][ncol] > dis[row][col] + 1) {
+                    dis[nrow][ncol] = dis[row][col] + 1;
+                    q.push({nrow, ncol});
+                }
+            }
+        }
+
+        return dis;
+    }
+};
+
+//M3
