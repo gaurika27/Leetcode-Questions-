@@ -54,7 +54,7 @@ public:
     }
 };
 
-//M2-DP Memoization
+//M2-DP 
 class Solution {
 public:
     int f(int ind, int buy, int cap, vector<int>& prices, vector<vector<vector<int>>>& dp) {
