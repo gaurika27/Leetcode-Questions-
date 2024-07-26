@@ -24,7 +24,7 @@ Constraints:
 1 <= ransomNote.length, magazine.length <= 105
 ransomNote and magazine consist of lowercase English letters.
 */
-
+//M1
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
@@ -44,4 +44,17 @@ public:
         }
         return i==m?1:0;
     }
+};
+
+//M2
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        unordered_map<char, int> char_Count;
+        for(char c: magazine) char_Count[c]++;
+        for(char c:ransomNote){
+            if(char_Count[c]==0) return false;
+            char_Count[c]--;
+        }
+        return true;    }
 };
