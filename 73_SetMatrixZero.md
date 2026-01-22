@@ -24,8 +24,8 @@ n == matrix[0].length
 -231 <= matrix[i][j] <= 231 - 1
 
 
-#Brute force
-
+# Brute force
+````
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
@@ -55,8 +55,11 @@ public:
     }
 };
 
-#Optimised Solution 
+````
 
+# Optimised Solution 
+
+````
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
@@ -88,3 +91,4 @@ public:
     }
 
 };
+````
