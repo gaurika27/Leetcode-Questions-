@@ -1,4 +1,3 @@
-/*
 Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
 
 You must do it in place.
@@ -23,7 +22,41 @@ m == matrix.length
 n == matrix[0].length
 1 <= m, n <= 200
 -231 <= matrix[i][j] <= 231 - 1
-*/
+
+
+#Brute force
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        vector<vector<int>> A = matrix;
+
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(matrix[i][j] == 0) {
+
+                    // zero entire row i
+                    for(int col = 0; col < n; col++) {
+                        A[i][col] = 0;
+                    }
+
+                    // zero entire column j
+                    for(int row = 0; row < m; row++) {
+                        A[row][j] = 0;
+                    }
+                }
+            }
+        }
+
+        matrix = A;
+    }
+};
+
+#Optimised Solution 
+
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
@@ -53,4 +86,5 @@ public:
             }
         }
     }
+
 };
