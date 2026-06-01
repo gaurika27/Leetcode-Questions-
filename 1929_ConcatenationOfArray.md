@@ -28,7 +28,7 @@ n == nums.length
 1 <= n <= 1000
 1 <= nums[i] <= 1000
 
-
+```
 class Solution {
 public:
     vector<int> getConcatenation(vector<int>& nums) {
@@ -44,8 +44,11 @@ public:
         return ans;       
     }
 };
+```
 
 //M2
+
+```
 class Solution {
 public:
     vector<int> getConcatenation(vector<int>& nums) {
@@ -58,3 +61,4 @@ public:
         return v;
     }
 };
+```
