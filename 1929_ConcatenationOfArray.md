@@ -46,7 +46,7 @@ public:
 };
 ```
 
-//M2
+### M2
 
 ```
 class Solution {
@@ -61,4 +61,25 @@ public:
         return v;
     }
 };
+```
+### M3
+
+<img width="569" height="640" alt="image" src="https://github.com/user-attachments/assets/a0a72e8e-08da-47c2-9b83-a672b1672eda" />
+
+TC=O(n)
+SC=O(n)
+
+```
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+        int n=nums.size();      
+        vector<int> ans(2*n);
+        for(int i=0; i<2*n; i++){
+            ans[i]=nums[i%n];
+        }
+        return ans;
+    }
+};
+
 ```
