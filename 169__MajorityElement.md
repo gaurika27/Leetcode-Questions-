@@ -26,6 +26,30 @@ n == nums.length
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
+        unordered_map<int,int> hash;
+        
+        int mx=INT_MIN;
+        for(auto it: nums){
+            hash[it]++;
+        } 
+        int maxFreq = 0;
+        int element = -1;
+        for (auto& [key, value] : hash) {
+            if (value > maxFreq) {
+                maxFreq = value;
+                element = key;
+            }
+        }
+        return element;        
+    }
+};
+```
+
+#### M2
+```cpp
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
         int n=nums.size();
         vector<int> res;
         map<int, int> mpp;
@@ -45,7 +69,7 @@ public:
 };
 ```
 
-#### M2
+#### M3
 ```cpp
 class Solution {
 public:
